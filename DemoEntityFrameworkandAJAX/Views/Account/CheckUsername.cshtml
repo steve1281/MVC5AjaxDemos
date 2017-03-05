@@ -1,0 +1,56 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnCheck').click(function () {
+                var username = $('#username').val();
+                $.ajax({
+                    type: 'GET',
+                    data: { username: username },
+                    url: '/Account/CheckUsername',
+                    success: function (response)
+                    {
+                        $('#result').html(response);
+                    }
+                });
+            });
+            $('#btnDump').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Account/Dump',
+                    success: function (response) {
+                        $('#result').html(response);
+                    }
+                });
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <br />
+    <div>
+        Username <input type="text" id="username" />
+        <input type="button" value="Check" id="btnCheck" />
+    </div>
+    <br />
+    <div>
+        <input type="button" value="Dump" id="btnDump" />
+    </div>
+    <br />
+    <div id="result"> 
+
+
+    </div>
+</body>
+</html>

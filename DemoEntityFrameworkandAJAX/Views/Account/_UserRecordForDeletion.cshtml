@@ -1,0 +1,34 @@
+﻿@model DemoEntityFrameworkandAJAX.Models.AddUserModel
+
+@{ 
+    Layout = null;
+    var username = Model.UserName;
+    var fullname = Model.FullName;
+}
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btnConfirm').click(function () {
+            var usernameDelete = $("#username-delete")[0].innerText;
+            $.ajax({
+                type: 'GET',
+                data: { username: usernameDelete },
+                url: '/Account/DeleteUserConfirmed',
+                success: function (response) {
+                    $('#delete-user-result').html(response);
+                }
+            });
+        });
+    });
+</script>
+
+<div id="delete-user-result">
+    Confirm deletion of:
+    <br/>
+    @Html.LabelFor(model=>model.UserName): <span id="username-delete">@username</span>
+    <br />
+    @Html.LabelFor(model => model.FullName):@fullname
+    <br />
+    <input id="btnConfirm" type="button" value="Confirm" />
+</div>
+

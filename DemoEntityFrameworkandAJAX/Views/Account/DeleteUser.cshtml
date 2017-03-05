@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DeletUser</title>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                var username = $('#user-name').val();
+                $.ajax({
+                    type: 'GET',
+                    data: { username: username },
+                    url: '/Account/DeleteUser',
+                    success: function (response) {
+                        $('#result').html(response);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        Username: <input id="user-name" type="text" name="UserName" /> <br />
+        <input type="button" id="submit" value="Submit" />
+        <br />
+    </div>    
+    <div id="result">
+
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddUser</title>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify({
+                        Username: $('#user-name').val(),
+                        FullName: $('#full-name').val(),
+                        Password: $('#password').val(),
+                        ConfirmPassword: $('#confirm-password').val(),
+                    }),
+                    url: '/Account/AddUser',
+                    contentType: 'application/json'
+                }).done(function (response) {
+                    $('#result').html(response);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div style="margin-left:200px;">
+        Username: <input id="user-name" type="text" name="UserName" /> <br />
+        Fullname: <input id="full-name" type="text" name="FullName" /> <br />
+        Password: <input id="password" type="password" name="Password" /> <br />
+        Confirm Password: <input id="confirm-password" type="password" name="ConfirmPassword" /> <br />
+        <input type="button" id="submit" value="Submit" />
+        <br />
+    </div>    
+    <div id="result">
+
+    </div>
+    
+</body>
+</html>
